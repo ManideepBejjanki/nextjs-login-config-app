@@ -27,13 +27,15 @@ const ConfigurationForm = () => {
     maintenanceMode: false,
   });
 
-  const handleChange = (e: React.ChangeEvent<any>) => {
-    const { name, value, type, checked, files } = e.target;
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value, type, checked, files } = e.target as HTMLInputElement;
 
     if (type === "checkbox") {
       setFormData((prev) => ({ ...prev, [name]: checked }));
     } else if (type === "file") {
-      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+      setFormData((prev) => ({ ...prev, [name]: files && files[0] }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
